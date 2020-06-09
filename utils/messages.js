@@ -3,3 +3,6 @@ exports.TRADE_MESSAGES = {
     CREATED_SUCCESSFULLY: 'Trades are Created Successfully',
     EXISTED_TRADE: ['EER_01','Trade Id already exist']
 }
+exports.STOCK_MESSAGES = {
+    INVALIED_STOCK_SYMBOL: ['EER_02','Invalied Stock Symbol']
+}

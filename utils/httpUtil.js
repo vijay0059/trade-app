@@ -19,6 +19,13 @@ exports.getBadRequest = (error = [ null, 'Bad Request']) => ({
     payLoad:null
 });
 
+exports.getNotFound = (error = [ null, 'Not Found']) => ({
+    status:404,
+    errorCode:error[0],
+    errorMessage:error[1],
+    payLoad:null
+});
+
 exports.getException = (error = [ null, 'Internal Server Error']) => ({
     status:500,
     errorCode:error[0],

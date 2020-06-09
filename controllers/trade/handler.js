@@ -16,10 +16,11 @@ exports.deleteAllTrades = (req,res) => {
 /**
  * Method to insert trades
  */
-exports.insertTrades = (req,res) => {
+exports.insertTrades = async (req,res) => {
     const insertData =req.body;
     mysql.query(sql.CHECK_TRADE_WITH_ID, [insertData.id], (err, existedData) => {
-        if(existedData.length > 0) return res.send(httpUtil.getBadRequest(TRADE_MESSAGES.EXISTED_TRADE));
+        if(existedData && existedData.length > 0) 
+            return res.send(httpUtil.getBadRequest(TRADE_MESSAGES.EXISTED_TRADE));
         mysql.query(sql.INSERT_TRADES, [
             insertData.id,
             insertData.type,
@@ -27,9 +28,10 @@ exports.insertTrades = (req,res) => {
             insertData.symbol,
             insertData.shares,
             insertData.price,
-            new Date()
+            insertData.timestamp
         ], (err, created) => {
-            if(err) return res.send(httpUtil.getBadRequest(TRADE_MESSAGES.EXISTED_TRADE));
+            console.log(err)
+            if(err) return res.send(httpUtil.getException(TRADE_MESSAGES.EXISTED_TRADE));
             return res.send(httpUtil.getCreated(created, TRADE_MESSAGES.CREATED_SUCCESSFULLY))
         });
     });        
