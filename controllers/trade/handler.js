@@ -32,6 +32,51 @@ exports.insertTrades = (req,res) => {
             if(err) return res.send(httpUtil.getBadRequest(TRADE_MESSAGES.EXISTED_TRADE));
             return res.send(httpUtil.getCreated(created, TRADE_MESSAGES.CREATED_SUCCESSFULLY))
         });
+    });        
+};
+
+/**
+ * method to get all list of trades
+ */
+
+exports.getListTrades = async (req,res) => {
+    await mysql.query(sql.LIST_TRADES, (error, results) => {
+        if(error) res.json(httpUtil.getException());
+        const responseObj = results.map(result => ({
+            id:result.id,
+            type:result.type,
+            user:{
+                id:result.userId,
+                name:result.name
+            },
+            symbol:result.symbol,
+            shares:result.shares,
+            price:result.price,
+            timestamp:result.timestamp
+        }));
+        res.json(httpUtil.getSuccess(responseObj));
     });
-        
-}
+};
+
+/**
+ * Method to get selected user trades
+ */
+exports.getUserTrdes = async (req,res) => {
+    const {userID} = req.params
+    await mysql.query(sql.GET_USER_TRADES, [userID], (error, results) => {
+        if(error) res.json(httpUtil.getException());
+        const responseObj = results.map(result => ({
+            id:result.id,
+            type:result.type,
+            user:{
+                id:result.userId,
+                name:result.name
+            },
+            symbol:result.symbol,
+            shares:result.shares,
+            price:result.price,
+            timestamp:result.timestamp
+        }));
+        res.json(httpUtil.getSuccess(responseObj));
+    });
+};

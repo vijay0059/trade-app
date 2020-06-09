@@ -9,5 +9,7 @@ router.use((req,res,next) => {
 
 router.delete('/', handler.deleteAllTrades);
 router.post('/', handler.insertTrades);
+router.get('/', handler.getListTrades);
+router.get('/users/:userID', handler.getUserTrdes);
 
 module.exports = router;
