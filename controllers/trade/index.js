@@ -1,10 +1,12 @@
 const express = require('express');
-
+const handler = require('./handler');
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  
-});
+router.use((req,res,next) => {
+    console.log("Trades API called");
+    next();
+})
+
+router.delete('/', handler.deleteAllTrades);
 
 module.exports = router;
