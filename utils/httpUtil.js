@@ -12,10 +12,10 @@ exports.getCreated = (payLoad = null, message = 'CREATED') => ({
     payLoad
 });
 
-exports.getBadRequest = (error = null, message = 'Bad Request') => ({
-    status:404,
-    errorCode:null,
-    errorMessage:error,
+exports.getBadRequest = (error = [ null, 'Bad Request']) => ({
+    status:400,
+    errorCode:error[0],
+    errorMessage:error[1],
     payLoad:null
 });
 

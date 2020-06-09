@@ -8,5 +8,6 @@ router.use((req,res,next) => {
 })
 
 router.delete('/', handler.deleteAllTrades);
+router.post('/', handler.insertTrades);
 
 module.exports = router;

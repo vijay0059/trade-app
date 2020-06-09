@@ -1,10 +1,19 @@
 const mysql = require('mysql');
-const pool = mysql.createPool({
-    connectionLimit:5,
-    host:'localhost',
-    user:'root',
-    password:'root',
-    database:'trade_db'
-})
+const connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'root',
+  database : 'trade_db'
 
-module.exports = pool;
+});
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
+
+module.exports = connection;
