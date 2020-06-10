@@ -46,7 +46,7 @@ exports.getMinAndMaxStocks = async (req,res) => {
         await mysql.query(sql.MIN_MAX_TRADES,[stockSymbol,start,end], (error, result) => {
             console.log('Min Max Stock Error', error);
             if(error) return res.json(httpUtil.getException());
-            const [minMaxTrades] = result;
+            const [minMaxTrades] = result[0].highest ? result : STOCK_MESSAGES.EMPTY_STOCK;
             return res.json(httpUtil.getSuccess(minMaxTrades));
         });
     } catch (error) {

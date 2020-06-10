@@ -9,6 +9,7 @@
 - cd trade-app
 - npm install
 - to run: npm start
+- to test: npm run test
 
 #### Development Tools
 

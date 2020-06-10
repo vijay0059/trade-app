@@ -4,5 +4,6 @@ exports.TRADE_MESSAGES = {
     EXISTED_TRADE: ['EER_01','Trade Id already exist']
 }
 exports.STOCK_MESSAGES = {
-    INVALIED_STOCK_SYMBOL: ['EER_02','Invalied Stock Symbol']
+    INVALIED_STOCK_SYMBOL: ['EER_02','Invalied Stock Symbol'],
+    EMPTY_STOCK: ['There are no trades in the given date range']
 }
