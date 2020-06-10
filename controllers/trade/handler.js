@@ -2,7 +2,7 @@ const {httpUtil,messages} = require('../../utils');
 const mysql = require('../../utils/db');
 const sql = require('./sql');
 const {TRADE_MESSAGES} = messages;
-
+const validator = require('./validator');
 /**
  * Method for Delete All trades
  */
@@ -17,8 +17,10 @@ exports.deleteAllTrades = (req,res) => {
  * Method to insert trades
  */
 exports.insertTrades = async (req,res) => {
-    const insertData =req.body;
-    mysql.query(sql.CHECK_TRADE_WITH_ID, [insertData.id], (err, existedData) => {
+    try {
+        const insertData =req.body;
+        await validator.validateData(insertData)
+        await mysql.query(sql.CHECK_TRADE_WITH_ID, [insertData.id], (err, existedData) => {
         if(existedData && existedData.length > 0) 
             return res.send(httpUtil.getBadRequest(TRADE_MESSAGES.EXISTED_TRADE));
         mysql.query(sql.INSERT_TRADES, [
@@ -34,7 +36,11 @@ exports.insertTrades = async (req,res) => {
             if(err) return res.send(httpUtil.getException(TRADE_MESSAGES.EXISTED_TRADE));
             return res.send(httpUtil.getCreated(created, TRADE_MESSAGES.CREATED_SUCCESSFULLY))
         });
-    });        
+    });  
+    } catch (error) {
+        console.log(error)
+        return res.json(httpUtil.getBadRequest([error.name,error.details[0].message]))
+    }      
 };
 
 /**
