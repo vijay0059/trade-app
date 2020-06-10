@@ -5,7 +5,7 @@
 
 #### Steps
 
-- git clone 
+- git clone https://github.com/vijay0059/trade-app.git
 - cd trade-app
 - npm install
 - to run: npm start
