@@ -8,5 +8,6 @@ router.use((req,res,next) => {
 })
 
 router.get('/:stockSymbol/trades', handler.getAllStocks);
+router.get('/:stockSymbol/price', handler.getMinAndMaxStocks);
 
 module.exports = router;
