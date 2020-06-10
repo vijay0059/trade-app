@@ -1,6 +1,6 @@
 #### Softwares Required
 
-- NodeJS 14.3
+- NodeJS 12.16.1
 - Mysql 5.5
 
 #### Steps
@@ -10,7 +10,7 @@
 - npm install
 - to run: npm start
 
-#### Other Tools
+#### Development Tools
 
 - Postman
 - SQLyog, other tools also used
